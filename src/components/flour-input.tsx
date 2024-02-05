@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import OthersInputs from './others-inputs';
+import OthersIngredients from './others-input';
 
 const FlourInput = (): JSX.Element => {
   const [flourAmount, setFlourAmount] = useState(0);
 
   const scale = (direction: 'up' | 'down') => {
-    // Incremento ou decremento arbitrário para ilustrar
+    //Incremento ou decremento arbitrário para ilustrar
     const step = 250;
 
     if (direction === 'up') {
@@ -51,7 +51,16 @@ const FlourInput = (): JSX.Element => {
         />
         <p>g</p>
       </div>
-      <OthersInputs />
+      <OthersIngredients
+        ingredient="Water"
+        inputTabIndex={3}
+        inputTabIndexTwo={2}
+      />
+      <OthersIngredients
+        ingredient="Milk"
+        inputTabIndex={3}
+        inputTabIndexTwo={2}
+      />
     </section>
   );
 };
