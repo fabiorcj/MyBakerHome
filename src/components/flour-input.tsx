@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import OthersIngredients from './others-input';
 
 const FlourInput = (): JSX.Element => {
   const [flourAmount, setFlourAmount] = useState(0);
-
+  //botão de incrementar valor em flour
   const scale = (direction: 'up' | 'down') => {
-    //Incremento ou decremento arbitrário para ilustrar
     const step = 250;
 
     if (direction === 'up') {
@@ -14,10 +12,9 @@ const FlourInput = (): JSX.Element => {
       setFlourAmount((prevAmount) => Math.max(prevAmount - step, 0));
     }
   };
-
   return (
-    <section className="inputs">
-      <div className="clearfix">
+    <>
+      <div className="label-ingredient">
         <label id="flour-label" htmlFor="flour">
           Farinha
         </label>
@@ -25,7 +22,7 @@ const FlourInput = (): JSX.Element => {
           8 cups
         </p>
       </div>
-      <div className="input-wrapper full">
+      <div className="input-ingredient full">
         <div
           id="decrementer"
           className="increment-button"
@@ -51,17 +48,7 @@ const FlourInput = (): JSX.Element => {
         />
         <p>g</p>
       </div>
-      <OthersIngredients
-        ingredient="Water"
-        inputTabIndex={3}
-        inputTabIndexTwo={2}
-      />
-      <OthersIngredients
-        ingredient="Milk"
-        inputTabIndex={3}
-        inputTabIndexTwo={2}
-      />
-    </section>
+    </>
   );
 };
 

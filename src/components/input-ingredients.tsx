@@ -2,16 +2,21 @@ interface Props {
   ingredient: string;
   inputTabIndex: number;
   inputTabIndexTwo: number;
+  visible: boolean;
 }
 
-const OthersIngredients: React.FC<Props> = ({
+const InputIngredients: React.FC<Props> = ({
   ingredient,
   inputTabIndex,
   inputTabIndexTwo,
+  visible,
 }) => {
   return (
-    <div className="">
-      <div className="clearfix">
+    <div
+      className={`ingredients-group ${visible ? '' : 'hidden'}`}
+      id={`${ingredient.toLocaleLowerCase()}-input-grup`}
+    >
+      <div className="label-ingredient">
         <label
           id={`${ingredient.toLowerCase()}-label`}
           htmlFor={`${ingredient.toLowerCase()}-grams`}
@@ -23,7 +28,7 @@ const OthersIngredients: React.FC<Props> = ({
         </p>
       </div>
       <div className="input-group">
-        <div className="input-wrapper left">
+        <div className="input-ingredient left">
           <input
             tabIndex={inputTabIndex}
             id={ingredient.toLowerCase()}
@@ -33,7 +38,7 @@ const OthersIngredients: React.FC<Props> = ({
           ></input>
           <p>%</p>
         </div>
-        <div className="input-wrapper right">
+        <div className="input-ingredient right">
           <input
             tabIndex={inputTabIndexTwo}
             id={`${ingredient.toLowerCase()}-grams`}
@@ -47,5 +52,4 @@ const OthersIngredients: React.FC<Props> = ({
     </div>
   );
 };
-
-export default OthersIngredients;
+export default InputIngredients;

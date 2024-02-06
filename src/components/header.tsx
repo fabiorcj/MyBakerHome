@@ -1,6 +1,6 @@
 const HeaderComponent = (): JSX.Element => {
   return (
-    <header>
+    <header className="header">
       <div className="bread-logo">
         <img
           className="bread-logo-img"

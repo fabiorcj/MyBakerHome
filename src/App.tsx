@@ -1,14 +1,12 @@
-import FlourInput from './components/flour-input';
 import HeaderComponent from './components/header';
+import ModalInputs from './components/inputsGroup-modal';
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="header">
-        <HeaderComponent />
-      </header>
-      <FlourInput />
-    </div>
+    <>
+      <HeaderComponent />
+      <ModalInputs />
+    </>
   );
 }
 
