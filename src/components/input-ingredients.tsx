@@ -1,8 +1,12 @@
+import React from 'react';
+import { useState } from 'react';
+
 interface Props {
   ingredient: string;
   inputTabIndex: number;
   inputTabIndexTwo: number;
   visible: boolean;
+  value: number;
 }
 
 const InputIngredients: React.FC<Props> = ({
@@ -10,11 +14,26 @@ const InputIngredients: React.FC<Props> = ({
   inputTabIndex,
   inputTabIndexTwo,
   visible,
+  value,
 }) => {
+  const [inputIngredientValue, setInputIngredientValue] = useState<number>(0);
+  const [percentageInput, setPercentageInput] = useState<number>(0);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseFloat(event.target.value);
+    setInputIngredientValue(newValue);
+    setPercentageInput((newValue / value) * 100);
+  };
+  const handlePercentageChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const newPercentage = parseFloat(event.target.value);
+    setPercentageInput(newPercentage);
+    setInputIngredientValue((value * newPercentage) / 100);
+  };
   return (
     <div
       className={`ingredients-group ${visible ? '' : 'hidden'}`}
-      id={`${ingredient.toLocaleLowerCase()}-input-grup`}
+      id={`${ingredient.toLowerCase()}-input-group`}
     >
       <div className="label-ingredient">
         <label
@@ -35,6 +54,8 @@ const InputIngredients: React.FC<Props> = ({
             type="number"
             name={ingredient.toLowerCase()}
             onClick={(e) => e.currentTarget.select()}
+            value={percentageInput}
+            onChange={handlePercentageChange}
           ></input>
           <p>%</p>
         </div>
@@ -45,6 +66,8 @@ const InputIngredients: React.FC<Props> = ({
             type="number"
             name={`${ingredient.toLowerCase()}-grams`}
             onClick={(e) => e.currentTarget.select()}
+            value={inputIngredientValue}
+            onChange={handleChange}
           ></input>
           <p>g</p>
         </div>
