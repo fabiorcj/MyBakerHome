@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   value: number;
 }
 
-const InputIngredients: React.FC<Props> = ({
+export const InputIngredients: React.FC<Props> = ({
   ingredient,
   inputTabIndex,
   inputTabIndexTwo,
@@ -18,11 +18,13 @@ const InputIngredients: React.FC<Props> = ({
 }) => {
   const [inputIngredientValue, setInputIngredientValue] = useState<number>(0);
   const [percentageInput, setPercentageInput] = useState<number>(0);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(event.target.value);
     setInputIngredientValue(newValue);
     setPercentageInput((newValue / value) * 100);
   };
+
   const handlePercentageChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -30,6 +32,10 @@ const InputIngredients: React.FC<Props> = ({
     setPercentageInput(newPercentage);
     setInputIngredientValue((value * newPercentage) / 100);
   };
+
+  useEffect(() => {
+    setInputIngredientValue((value * percentageInput) / 100);
+  }, [value]);
   return (
     <div
       className={`ingredients-group ${visible ? '' : 'hidden'}`}
@@ -75,4 +81,3 @@ const InputIngredients: React.FC<Props> = ({
     </div>
   );
 };
-export default InputIngredients;

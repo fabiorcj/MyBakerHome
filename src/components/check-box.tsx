@@ -3,12 +3,12 @@ interface ModalProps {
   onToggle: () => void;
 }
 
-const CheckBox: React.FC<ModalProps> = ({ ingredient, onToggle }) => {
+export const CheckBox: React.FC<ModalProps> = ({ ingredient, onToggle }) => {
   const handleChange = () => {
     onToggle();
   };
   return (
-    <>
+    <div className="input-check">
       <input
         type="checkbox"
         name="ingredient"
@@ -16,7 +16,6 @@ const CheckBox: React.FC<ModalProps> = ({ ingredient, onToggle }) => {
         onChange={handleChange}
       />
       <label htmlFor={`${ingredient.toLowerCase}-checkbox`}>{ingredient}</label>
-    </>
+    </div>
   );
 };
-export default CheckBox;
