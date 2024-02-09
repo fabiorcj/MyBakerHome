@@ -11,6 +11,7 @@ export function App() {
   const [chocolateShowInput, setChocolateShowInput] = useState(false);
   const [butterShowInput, setButterShowInput] = useState(false);
   const [sugarShowInput, setSugarShowInput] = useState(false);
+  const [yeastShowInput, setYeastShowInput] = useState(false);
   //functin visible modal
   const mostrarModal = () => {
     setModalVisible(true);
@@ -57,7 +58,7 @@ export function App() {
             Flour
           </label>
           <p className="volume-label" id="flour-volume">
-            8 cups
+            ####
           </p>
         </div>
         <div className="input-ingredient full">
@@ -77,7 +78,6 @@ export function App() {
           </div>
           <input
             className=""
-            tabIndex={1}
             id="flour"
             type="number"
             name="flour"
@@ -89,58 +89,47 @@ export function App() {
         </div>
         <InputIngredients
           ingredient="Water"
-          inputTabIndex={2}
-          inputTabIndexTwo={3}
           visible={true}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Salt"
-          inputTabIndex={4}
-          inputTabIndexTwo={5}
           visible={saltShowInput}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Sugar"
-          inputTabIndex={6}
-          inputTabIndexTwo={7}
           visible={sugarShowInput}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Oil"
-          inputTabIndex={8}
-          inputTabIndexTwo={9}
           visible={oilShowInput}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Butter"
-          inputTabIndex={10}
-          inputTabIndexTwo={11}
           visible={butterShowInput}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Eggs"
-          inputTabIndex={12}
-          inputTabIndexTwo={13}
           visible={eggsShowInput}
           value={flourAmount}
         />
         <InputIngredients
           ingredient={'Chocolate'}
-          inputTabIndex={14}
-          inputTabIndexTwo={15}
           visible={chocolateShowInput}
           value={flourAmount}
         />
         <InputIngredients
           ingredient={'Milk'}
-          inputTabIndex={14}
-          inputTabIndexTwo={15}
           visible={milkShowInput}
+          value={flourAmount}
+        />
+        <InputIngredients
+          ingredient={'Yeast'}
+          visible={yeastShowInput}
           value={flourAmount}
         />
       </section>
@@ -190,6 +179,22 @@ export function App() {
               <CheckBox
                 ingredient={'Eggs'}
                 onToggle={() => setEggsShowInput(!eggsShowInput)}
+              />
+              <CheckBox
+                ingredient={'Butter'}
+                onToggle={() => setButterShowInput(!butterShowInput)}
+              />
+              <CheckBox
+                ingredient={'Chocolate'}
+                onToggle={() => setChocolateShowInput(!chocolateShowInput)}
+              />
+              <CheckBox
+                ingredient={'Sugar'}
+                onToggle={() => setSugarShowInput(!sugarShowInput)}
+              />
+              <CheckBox
+                ingredient={'Yeast'}
+                onToggle={() => setYeastShowInput(!yeastShowInput)}
               />
             </div>
             <div className="modal-buttongroup">

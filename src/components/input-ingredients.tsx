@@ -3,28 +3,27 @@ import { useState } from 'react';
 
 interface Props {
   ingredient: string;
-  inputTabIndex: number;
-  inputTabIndexTwo: number;
+
   visible: boolean;
   value: number;
 }
 
 export const InputIngredients: React.FC<Props> = ({
   ingredient,
-  inputTabIndex,
-  inputTabIndexTwo,
+
   visible,
   value,
 }) => {
   const [inputIngredientValue, setInputIngredientValue] = useState<number>(0);
   const [percentageInput, setPercentageInput] = useState<number>(0);
-
+  // math ingredient value
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(event.target.value);
     setInputIngredientValue(newValue);
     setPercentageInput((newValue / value) * 100);
   };
-
+  // math ingredient value
+  // math percentage value
   const handlePercentageChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -32,10 +31,12 @@ export const InputIngredients: React.FC<Props> = ({
     setPercentageInput(newPercentage);
     setInputIngredientValue((value * newPercentage) / 100);
   };
-
+  // math percentage value
+  // flour att ingredient value
   useEffect(() => {
     setInputIngredientValue((value * percentageInput) / 100);
   }, [value]);
+  // flour att ingredient value
   return (
     <div
       className={`ingredients-group ${visible ? '' : 'hidden'}`}
@@ -49,13 +50,12 @@ export const InputIngredients: React.FC<Props> = ({
           {ingredient}
         </label>
         <p className="volume-label" id={`${ingredient.toLowerCase()}-volume`}>
-          3.17cups
+          ####
         </p>
       </div>
       <div className="input-group">
         <div className="input-ingredient left">
           <input
-            tabIndex={inputTabIndex}
             id={ingredient.toLowerCase()}
             type="number"
             name={ingredient.toLowerCase()}
@@ -67,7 +67,6 @@ export const InputIngredients: React.FC<Props> = ({
         </div>
         <div className="input-ingredient right">
           <input
-            tabIndex={inputTabIndexTwo}
             id={`${ingredient.toLowerCase()}-grams`}
             type="number"
             name={`${ingredient.toLowerCase()}-grams`}
