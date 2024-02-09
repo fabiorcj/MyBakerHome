@@ -26,16 +26,6 @@ export function App() {
     { name: 'Yeast', visible: state.yeast },
   ];
 
-  const checkBox = [
-    'Salt',
-    'Milk',
-    'Oil',
-    'Eggs',
-    'Butter',
-    'Chocolate',
-    'Sugar',
-    'Yeast',
-  ];
   //functin visible modal
   const mostrarModal = () => {
     setState({ ...state, modal: true });
