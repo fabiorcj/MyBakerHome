@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CheckBox } from './components/check-box';
-import { InputIngredients } from './components/InputIngredients';
+import { InputIngredients } from './components/input-ingredients';
 
 export function App() {
   const [state, setState] = useState({
@@ -14,7 +14,17 @@ export function App() {
     sugar: false,
     yeast: false,
   });
+  const [extraIngredients, setExtraIngredients] = useState<string[]>([]);
 
+  const addIngredient = (ingredient: string | null) => {
+    if (ingredient) {
+      setState((prevState) => ({
+        ...prevState,
+        [ingredient.toLowerCase()]: false,
+      }));
+      setExtraIngredients([...extraIngredients, ingredient]);
+    }
+  };
   const ingredients = [
     { name: 'Salt', visible: state.salt },
     { name: 'Sugar', visible: state.sugar },
@@ -24,6 +34,10 @@ export function App() {
     { name: 'Chocolate', visible: state.chocolate },
     { name: 'Milk', visible: state.milk },
     { name: 'Yeast', visible: state.yeast },
+    ...extraIngredients.map((ingredient: string) => ({
+      name: ingredient,
+      visible: state[ingredient.toLowerCase() as keyof typeof state],
+    })),
   ];
 
   //functin visible modal
@@ -159,6 +173,16 @@ export function App() {
                 ))}
               </>
             </div>
+            <button
+              className="ingredients-button"
+              id="button"
+              onClick={(e) => {
+                e.preventDefault();
+                addIngredient(prompt('Enter ingredient name'));
+              }}
+            >
+              Add Ingredient
+            </button>
             <div className="modal-buttongroup">
               <input
                 type="button"
