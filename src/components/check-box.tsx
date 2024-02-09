@@ -1,9 +1,9 @@
-interface ModalProps {
+interface Props {
   ingredient: string;
   onToggle: () => void;
 }
 
-export const CheckBox: React.FC<ModalProps> = ({ ingredient, onToggle }) => {
+export const CheckBox: React.FC<Props> = ({ ingredient, onToggle }) => {
   const handleChange = () => {
     onToggle();
   };
