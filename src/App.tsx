@@ -25,6 +25,17 @@ export function App() {
     { name: 'Milk', visible: state.milk },
     { name: 'Yeast', visible: state.yeast },
   ];
+
+  const checkBox = [
+    'Salt',
+    'Milk',
+    'Oil',
+    'Eggs',
+    'Butter',
+    'Chocolate',
+    'Sugar',
+    'Yeast',
+  ];
   //functin visible modal
   const mostrarModal = () => {
     setState({ ...state, modal: true });
@@ -140,82 +151,23 @@ export function App() {
                 />
                 <label htmlFor="water-checkbox">Water</label>
               </div>
-
-              <CheckBox
-                ingredient={'Salt'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    salt: !prevState.salt,
-                  }))
-                }
-              />
-
-              <CheckBox
-                ingredient={'Milk'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    milk: !prevState.milk,
-                  }))
-                }
-              />
-
-              <CheckBox
-                ingredient={'Oil'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    oil: !prevState.oil,
-                  }))
-                }
-              />
-
-              <CheckBox
-                ingredient={'Eggs'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    eggs: !prevState.eggs,
-                  }))
-                }
-              />
-              <CheckBox
-                ingredient={'Butter'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    butter: !prevState.butter,
-                  }))
-                }
-              />
-              <CheckBox
-                ingredient={'Chocolate'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    chocolate: !prevState.chocolate,
-                  }))
-                }
-              />
-              <CheckBox
-                ingredient={'Sugar'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    sugar: !prevState.sugar,
-                  }))
-                }
-              />
-              <CheckBox
-                ingredient={'Yeast'}
-                onToggle={() =>
-                  setState((prevState) => ({
-                    ...prevState,
-                    yeast: !prevState.yeast,
-                  }))
-                }
-              />
+              <>
+                {ingredients.map((ingredient, index) => (
+                  <CheckBox
+                    key={index}
+                    ingredient={ingredient.name}
+                    onToggle={() =>
+                      setState((prevState) => ({
+                        ...prevState,
+                        [ingredient.name.toLowerCase() as keyof typeof prevState]:
+                          !prevState[
+                            ingredient.name.toLowerCase() as keyof typeof prevState
+                          ],
+                      }))
+                    }
+                  />
+                ))}
+              </>
             </div>
             <div className="modal-buttongroup">
               <input
@@ -230,7 +182,4 @@ export function App() {
       </div>
     </>
   );
-}
-function setModalVisible(arg0: boolean) {
-  throw new Error('Function not implemented.');
 }
