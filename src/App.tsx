@@ -14,6 +14,17 @@ export function App() {
     sugar: false,
     yeast: false,
   });
+
+  const ingredients = [
+    { name: 'Salt', visible: state.salt },
+    { name: 'Sugar', visible: state.sugar },
+    { name: 'Oil', visible: state.oil },
+    { name: 'Butter', visible: state.butter },
+    { name: 'Eggs', visible: state.eggs },
+    { name: 'Chocolate', visible: state.chocolate },
+    { name: 'Milk', visible: state.milk },
+    { name: 'Yeast', visible: state.yeast },
+  ];
   //functin visible modal
   const mostrarModal = () => {
     setState({ ...state, modal: true });
@@ -91,46 +102,16 @@ export function App() {
           visible={true}
           value={flourAmount}
         />
-        <InputIngredients
-          ingredient="Salt"
-          visible={state.salt}
-          value={flourAmount}
-        />
-        <InputIngredients
-          ingredient="Sugar"
-          visible={state.sugar}
-          value={flourAmount}
-        />
-        <InputIngredients
-          ingredient="Oil"
-          visible={state.oil}
-          value={flourAmount}
-        />
-        <InputIngredients
-          ingredient="Butter"
-          visible={state.butter}
-          value={flourAmount}
-        />
-        <InputIngredients
-          ingredient="Eggs"
-          visible={state.eggs}
-          value={flourAmount}
-        />
-        <InputIngredients
-          ingredient={'Chocolate'}
-          visible={state.chocolate}
-          value={flourAmount}
-        />
-        <InputIngredients
-          ingredient={'Milk'}
-          visible={state.milk}
-          value={flourAmount}
-        />
-        <InputIngredients
-          ingredient={'Yeast'}
-          visible={state.yeast}
-          value={flourAmount}
-        />
+        <>
+          {ingredients.map((ingredient, index) => (
+            <InputIngredients
+              key={index}
+              ingredient={ingredient.name}
+              visible={ingredient.visible}
+              value={flourAmount}
+            />
+          ))}
+        </>
       </section>
       <button className="ingredients-button" id="button" onClick={mostrarModal}>
         Add/Remove Ingredients
