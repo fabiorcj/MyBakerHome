@@ -1,23 +1,25 @@
 import { useState } from 'react';
 import { CheckBox } from './components/check-box';
-import { InputIngredients } from './components/input-ingredients';
+import { InputIngredients } from './components/InputIngredients';
 
 export function App() {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [saltShowInput, setSaltShowInput] = useState(false);
-  const [eggsShowInput, setEggsShowInput] = useState(false);
-  const [milkShowInput, setMilkShowInput] = useState(false);
-  const [oilShowInput, setOilShowInput] = useState(false);
-  const [chocolateShowInput, setChocolateShowInput] = useState(false);
-  const [butterShowInput, setButterShowInput] = useState(false);
-  const [sugarShowInput, setSugarShowInput] = useState(false);
-  const [yeastShowInput, setYeastShowInput] = useState(false);
+  const [state, setState] = useState({
+    modal: false,
+    salt: false,
+    eggs: false,
+    milk: false,
+    oil: false,
+    chocolate: false,
+    butter: false,
+    sugar: false,
+    yeast: false,
+  });
   //functin visible modal
   const mostrarModal = () => {
-    setModalVisible(true);
+    setState({ ...state, modal: true });
   };
   const fecharModal = () => {
-    setModalVisible(false);
+    setState({ ...state, modal: false });
   };
   //functin visible modal
 
@@ -57,9 +59,6 @@ export function App() {
           <label id="flour-label" htmlFor="flour">
             Flour
           </label>
-          <p className="volume-label" id="flour-volume">
-            ####
-          </p>
         </div>
         <div className="input-ingredient full">
           <div
@@ -94,49 +93,49 @@ export function App() {
         />
         <InputIngredients
           ingredient="Salt"
-          visible={saltShowInput}
+          visible={state.salt}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Sugar"
-          visible={sugarShowInput}
+          visible={state.sugar}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Oil"
-          visible={oilShowInput}
+          visible={state.oil}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Butter"
-          visible={butterShowInput}
+          visible={state.butter}
           value={flourAmount}
         />
         <InputIngredients
           ingredient="Eggs"
-          visible={eggsShowInput}
+          visible={state.eggs}
           value={flourAmount}
         />
         <InputIngredients
           ingredient={'Chocolate'}
-          visible={chocolateShowInput}
+          visible={state.chocolate}
           value={flourAmount}
         />
         <InputIngredients
           ingredient={'Milk'}
-          visible={milkShowInput}
+          visible={state.milk}
           value={flourAmount}
         />
         <InputIngredients
           ingredient={'Yeast'}
-          visible={yeastShowInput}
+          visible={state.yeast}
           value={flourAmount}
         />
       </section>
       <button className="ingredients-button" id="button" onClick={mostrarModal}>
         Add/Remove Ingredients
       </button>
-      <div id="modal" className={modalVisible ? '' : 'hidden'}>
+      <div id="modal" className={state.modal ? '' : 'hidden'}>
         <div className="modal-painel">
           <form method="post">
             <div className="modal-content">
@@ -163,38 +162,78 @@ export function App() {
 
               <CheckBox
                 ingredient={'Salt'}
-                onToggle={() => setSaltShowInput(!saltShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    salt: !prevState.salt,
+                  }))
+                }
               />
 
               <CheckBox
                 ingredient={'Milk'}
-                onToggle={() => setMilkShowInput(!milkShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    milk: !prevState.milk,
+                  }))
+                }
               />
 
               <CheckBox
                 ingredient={'Oil'}
-                onToggle={() => setOilShowInput(!oilShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    oil: !prevState.oil,
+                  }))
+                }
               />
 
               <CheckBox
                 ingredient={'Eggs'}
-                onToggle={() => setEggsShowInput(!eggsShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    eggs: !prevState.eggs,
+                  }))
+                }
               />
               <CheckBox
                 ingredient={'Butter'}
-                onToggle={() => setButterShowInput(!butterShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    butter: !prevState.butter,
+                  }))
+                }
               />
               <CheckBox
                 ingredient={'Chocolate'}
-                onToggle={() => setChocolateShowInput(!chocolateShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    chocolate: !prevState.chocolate,
+                  }))
+                }
               />
               <CheckBox
                 ingredient={'Sugar'}
-                onToggle={() => setSugarShowInput(!sugarShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    sugar: !prevState.sugar,
+                  }))
+                }
               />
               <CheckBox
                 ingredient={'Yeast'}
-                onToggle={() => setYeastShowInput(!yeastShowInput)}
+                onToggle={() =>
+                  setState((prevState) => ({
+                    ...prevState,
+                    yeast: !prevState.yeast,
+                  }))
+                }
               />
             </div>
             <div className="modal-buttongroup">
@@ -210,4 +249,7 @@ export function App() {
       </div>
     </>
   );
+}
+function setModalVisible(arg0: boolean) {
+  throw new Error('Function not implemented.');
 }

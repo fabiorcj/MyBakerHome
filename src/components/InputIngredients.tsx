@@ -1,21 +1,15 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-
-interface Props {
-  ingredient: string;
-
-  visible: boolean;
-  value: number;
-}
+import { Props } from './input-ingredients';
 
 export const InputIngredients: React.FC<Props> = ({
   ingredient,
-
   visible,
   value,
 }) => {
   const [inputIngredientValue, setInputIngredientValue] = useState<number>(0);
   const [percentageInput, setPercentageInput] = useState<number>(0);
+  const [cupValue, setCupValue] = useState<number>(0);
   // math ingredient value
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(event.target.value);
