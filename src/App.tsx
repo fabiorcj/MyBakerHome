@@ -1,8 +1,26 @@
 import { useState } from 'react';
 import { CheckBox } from './components/check-box';
 import { InputIngredients } from './components/input-ingredients';
-
+import LogoPao from './assets/img/pao-logo.png';
+import Plus from './assets/img/plus.png';
+import Minus from './assets/img/minus.png';
+import { NoteCard } from './components/note';
+import { useTranslation } from 'react-i18next';
 export function App() {
+  const {
+    t,
+    i18n: { changeLanguage, language },
+  } = useTranslation();
+
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+
+  function handleChangeLanguage() {
+    const newLanguage = currentLanguage === 'en' ? 'pt' : 'en';
+    changeLanguage(newLanguage);
+    setCurrentLanguage(newLanguage);
+  }
+
+  // add new incredient
   const [state, setState] = useState({
     modal: false,
     salt: false,
@@ -40,6 +58,8 @@ export function App() {
     })),
   ];
 
+  // add new incredient
+
   //functin visible modal
   const mostrarModal = () => {
     setState({ ...state, modal: true });
@@ -70,20 +90,19 @@ export function App() {
   //button increment value in flour
   return (
     <>
+      <button onClick={handleChangeLanguage} className="bd">
+        EN/PT
+      </button>
       <header className="header">
-        <div className="bread-logo">
-          <img
-            className="bread-logo-img"
-            src="./src/assets/img/pao-logo.png"
-            alt=""
-          />
+        <div className="bread-logo my-3">
+          <img className="bread-logo-img" src={LogoPao} alt="" />
         </div>
         <h1>Bread Calculator</h1>
       </header>
       <section className="inputs">
         <div className="label-ingredient">
           <label id="flour-label" htmlFor="flour">
-            Flour
+            {t('Flour')}
           </label>
         </div>
         <div className="input-ingredient full">
@@ -92,14 +111,14 @@ export function App() {
             className="increment-button"
             onClick={() => scale('down')}
           >
-            <img src="./src/assets/img/minus.png" alt="Decrement" />
+            <img src={Minus} alt="Decrement" />
           </div>
           <div
             id="incrementer"
             className="increment-button"
             onClick={() => scale('up')}
           >
-            <img src="./src/assets/img/plus.png" alt="Increment" />
+            <img src={Plus} alt="Increment" />
           </div>
           <input
             className=""
@@ -128,7 +147,11 @@ export function App() {
           ))}
         </>
       </section>
-      <button className="ingredients-button" id="button" onClick={mostrarModal}>
+      <button
+        className=" hover:ring-1 hover:ring-offset-slate-200 ingredients-button"
+        id="button"
+        onClick={mostrarModal}
+      >
         Add/Remove Ingredients
       </button>
       <div id="modal" className={state.modal ? '' : 'hidden'}>
@@ -181,7 +204,7 @@ export function App() {
                 addIngredient(prompt('Enter ingredient name'));
               }}
             >
-              Add Ingredient
+              Add Other Ingredient
             </button>
             <div className="modal-buttongroup">
               <input
@@ -194,6 +217,9 @@ export function App() {
           </form>
         </div>
       </div>
+      <section>
+        <NoteCard />
+      </section>
     </>
   );
 }

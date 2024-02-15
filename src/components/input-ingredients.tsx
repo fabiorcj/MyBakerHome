@@ -13,7 +13,7 @@ export const InputIngredients: React.FC<Props> = ({
   value,
 }) => {
   const [inputIngredientValue, setInputIngredientValue] = useState<number>(0);
-  const [percentageInput, setPercentageInput] = useState<number>(0);
+  const [percentageInput, setPercentageInput] = useState<number>(50);
 
   // math ingredient value
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +32,7 @@ export const InputIngredients: React.FC<Props> = ({
   };
   // math percentage value
   // flour att ingredient value
+
   useEffect(() => {
     setInputIngredientValue((value * percentageInput) / 100);
   }, [value]);
