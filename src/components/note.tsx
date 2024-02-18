@@ -1,4 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import { t } from 'i18next';
 import { X } from 'lucide-react';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { toast } from 'sonner';
@@ -84,7 +85,7 @@ export function NoteCard() {
       <Dialog.Root>
         <Dialog.Trigger className=" max-w[380px] h-auto rounded-md text-left bg-[#fff] flex flex-col p-5 gap-3 overflow-hidden border border-color[rgba(223, 220, 200, 0.5)] relative hover:ring-1 hover:ring-offset-slate-200 focus-visible:ring-2 focus-visible:ring-lime-400 outline-none">
           <span className="text-sm font-medium text-slate-300">
-            Clique para adicionar uma descrição da receita
+            {t('Click to add a recipe description')}
           </span>
 
           <p className="text-sm leading-6 text-slate-600">{content}</p>
@@ -97,44 +98,45 @@ export function NoteCard() {
             <form className="flex-1 flex flex-col">
               <div className="flex flex-1 flex-col gap-3 p-5">
                 <span className="text-sm font-medium text-slate-400">
-                  Adicionar ou editar descrição da receita escolhendo a melhor
-                  opção
+                  {t(
+                    'Add or edit recipe description choosing the best one option',
+                  )}
                 </span>
                 {shouldShowOnboarding ? (
                   content ? (
                     <p className="text-sm leading-6 text-slate-400">
-                      Edite{' '}
+                      {t('Edit')}{' '}
                       <button
                         onClick={handleStartRecording}
                         className="font-medium text-[#f3dac9] hover:underline"
                       >
-                        gravando uma descrição
+                        {t('recording an audio description')}
                       </button>{' '}
-                      em áudio. Ou{' '}
+                      {t('Or')}{' '}
                       <button
                         onClick={handleStartNote}
                         className="font-medium text-[#f3dac9] hover:underline"
                       >
-                        apenas digite para editar sua descrição
+                        {t('just type to edit your description')}
                       </button>
                     </p>
                   ) : (
                     <p className="text-sm leading-6 text-slate-400">
-                      Comece{' '}
+                      {t('Start')}{' '}
                       <button
                         type="button"
                         onClick={handleStartRecording}
                         className="font-medium text-[#f3dac9] hover:underline"
                       >
-                        gravando uma descrição
+                        {t('recording an audio description')}
                       </button>{' '}
-                      em áudio. Ou{' '}
+                      {t('Or')}{' '}
                       <button
                         type="button"
                         onClick={handleStartNote}
                         className="font-medium text-[#f3dac9] hover:underline"
                       >
-                        apenas digite sua descrição
+                        {t('just enter your description')}
                       </button>
                     </p>
                   )
@@ -155,7 +157,7 @@ export function NoteCard() {
                   className="w-full flex items-center justify-center gap-2 bg-slate-900 py-4 text-center text-sm text-slate-300 outline-none font-medium hover:text-slate-100"
                 >
                   <div className="size-3 rounded-full bg-red-500 animate-pulse" />
-                  Gravando!! (clique para interromper)
+                  {t('Recording!! (click to stop)')}
                 </button>
               ) : (
                 <button
@@ -163,9 +165,9 @@ export function NoteCard() {
                   className=" bg-black hover:bg-slate-700 mt- py-4 text-center text-sm text-slate-300 outline-none font-medium grou"
                   type="button"
                 >
-                  Deseja{' '}
+                  {t('Do you want to')}{' '}
                   <span className="text-lime-400 group-hover:underline">
-                    salvar esta descrição
+                    {t('save this description')}
                   </span>
                   ?
                 </button>
@@ -178,7 +180,7 @@ export function NoteCard() {
         onClick={handleDeleteContent}
         className="bg-orange-400 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg w-auto mt-1 p-1 font-semibold text-sm"
       >
-        Limpar tudo
+        {t('Clean all')}
       </button>
     </section>
   );

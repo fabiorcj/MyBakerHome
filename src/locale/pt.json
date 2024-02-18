@@ -1,5 +1,29 @@
 {
   "translation": {
-    "Flour": "Farinha"
+    "Flour": "Farinha",
+    "Salt": "Sal",
+    "Water": "Água",
+    "Sugar": "Açúcar",
+    "Milk": "Leite",
+    "Butter": "Manteiga",
+    "Yeast": "Fermento",
+    "Egg": "Ovo",
+    "Oil": "Óleo",
+    "Bread Calculator": "Calculadora de Pão",
+    "Add/Remove Ingredients": " Adicionar/Remover Ingredientes ",
+    "Add Other Ingredient": "Adicionar outro ingrediente",
+    "Recording!! (click to stop)": "Gravando!! (clique para interromper)",
+    "Do you want to": "Deseja",
+    "save this description": "salvar esta descrição?",
+    "Add or edit recipe description choosing the best one option": "Adicionar ou editar descrição da receita escolhendo a melhor opção",
+    "Edit": "Edite",
+    "just type to edit your description": "apenas digite para editar sua descrição",
+    "recording an audio description": "gravando uma descrição em áudio",
+    "Or": "Ou",
+    "just enter your description": "apenas digite sua descrição",
+    "Start": "Comece",
+    "Click to add a recipe description": "Clique para adicionar uma descrição da receita",
+    "Clean all": "Limpar tudo",
+    "Enter ingredient name": "Coloque o nome do ingrediente"
   }
 }

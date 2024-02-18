@@ -30,6 +30,7 @@ export const InputIngredients: React.FC<Props> = ({
     setPercentageInput(newPercentage);
     setInputIngredientValue((value * newPercentage) / 100);
   };
+
   // math percentage value
   // flour att ingredient value
 
@@ -37,6 +38,7 @@ export const InputIngredients: React.FC<Props> = ({
     setInputIngredientValue((value * percentageInput) / 100);
   }, [value]);
   // flour att ingredient value
+
   return (
     <div
       className={`ingredients-group ${visible ? '' : 'hidden'}`}

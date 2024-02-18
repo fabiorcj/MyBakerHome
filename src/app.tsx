@@ -6,18 +6,29 @@ import Plus from './assets/img/plus.png';
 import Minus from './assets/img/minus.png';
 import { NoteCard } from './components/note';
 import { useTranslation } from 'react-i18next';
+
 export function App() {
   const {
     t,
     i18n: { changeLanguage, language },
   } = useTranslation();
 
-  const [currentLanguage, setCurrentLanguage] = useState(language);
+  const [currentLanguage, setCurrentLanguage] = useState(() => {
+    const newCurrentLanguage = localStorage.getItem('language');
+    if (newCurrentLanguage) {
+      return JSON.parse(newCurrentLanguage);
+    }
+    return;
+  });
 
   function handleChangeLanguage() {
     const newLanguage = currentLanguage === 'en' ? 'pt' : 'en';
     changeLanguage(newLanguage);
     setCurrentLanguage(newLanguage);
+    localStorage.setItem(
+      'language',
+      JSON.stringify(currentLanguage === 'en' ? 'pt' : 'en'),
+    );
   }
 
   // add new incredient
@@ -44,14 +55,14 @@ export function App() {
     }
   };
   const ingredients = [
-    { name: 'Salt', visible: state.salt },
-    { name: 'Sugar', visible: state.sugar },
-    { name: 'Oil', visible: state.oil },
-    { name: 'Butter', visible: state.butter },
-    { name: 'Eggs', visible: state.eggs },
-    { name: 'Chocolate', visible: state.chocolate },
-    { name: 'Milk', visible: state.milk },
-    { name: 'Yeast', visible: state.yeast },
+    { name: t('Salt'), visible: state.salt },
+    { name: t('Sugar'), visible: state.sugar },
+    { name: t('Oil'), visible: state.oil },
+    { name: t('Butter'), visible: state.butter },
+    { name: t('Eggs'), visible: state.eggs },
+    { name: t('Chocolate'), visible: state.chocolate },
+    { name: t('Milk'), visible: state.milk },
+    { name: t('Yeast'), visible: state.yeast },
     ...extraIngredients.map((ingredient: string) => ({
       name: ingredient,
       visible: state[ingredient.toLowerCase() as keyof typeof state],
@@ -88,16 +99,29 @@ export function App() {
     }
   };
   //button increment value in flour
+
   return (
     <>
-      <button onClick={handleChangeLanguage} className="bd">
-        EN/PT
-      </button>
+      {currentLanguage === 'en' ? (
+        <button
+          onClick={handleChangeLanguage}
+          className="text-sm font-sans font-semibold bg-gradient-to-r from-blue-600 to-red-500 p-0.5 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg"
+        >
+          EN/PT
+        </button>
+      ) : (
+        <button
+          onClick={handleChangeLanguage}
+          className="text-sm font-sans font-semibold bg-gradient-to-r from-green-600 to-yellow-400 p-0.5 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg"
+        >
+          EN/PT
+        </button>
+      )}
       <header className="header">
         <div className="bread-logo my-3">
           <img className="bread-logo-img" src={LogoPao} alt="" />
         </div>
-        <h1>Bread Calculator</h1>
+        <h1> {t('Bread Calculator')}</h1>
       </header>
       <section className="inputs">
         <div className="label-ingredient">
@@ -132,7 +156,7 @@ export function App() {
           <p>g</p>
         </div>
         <InputIngredients
-          ingredient="Water"
+          ingredient={t('Water')}
           visible={true}
           value={flourAmount}
         />
@@ -152,7 +176,7 @@ export function App() {
         id="button"
         onClick={mostrarModal}
       >
-        Add/Remove Ingredients
+        {t('Add/Remove Ingredients')}
       </button>
       <div id="modal" className={state.modal ? '' : 'hidden'}>
         <div className="modal-painel">
@@ -166,7 +190,7 @@ export function App() {
                   checked
                   disabled
                 />
-                <label htmlFor="flour-checkbox">Flour</label>
+                <label htmlFor="flour-checkbox">{t('Flour')}</label>
               </div>
               <div className="input-check">
                 <input
@@ -176,7 +200,7 @@ export function App() {
                   checked
                   disabled
                 />
-                <label htmlFor="water-checkbox">Water</label>
+                <label htmlFor="water-checkbox">{t('Water')}</label>
               </div>
               <>
                 {ingredients.map((ingredient, index) => (
@@ -201,10 +225,10 @@ export function App() {
               id="button"
               onClick={(e) => {
                 e.preventDefault();
-                addIngredient(prompt('Enter ingredient name'));
+                addIngredient(prompt(t('Enter ingredient name')));
               }}
             >
-              Add Other Ingredient
+              {t('Add Other Ingredient')}
             </button>
             <div className="modal-buttongroup">
               <input

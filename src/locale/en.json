@@ -1,5 +1,29 @@
 {
   "translation": {
-    "Flour": "Flour"
+    "Flour": "Flour",
+    "Salt": "Salt",
+    "Water": "Water",
+    "Sugar": "Sugar",
+    "Milk": "Milk",
+    "Butter": "Butter",
+    "Yeast": "Yeast",
+    "Egg": "Egg",
+    "Oil": "Oil",
+    "Bread Calculator": "Bread Calculator",
+    "Add/Remove Ingredients": " Add/Remove Ingredients ",
+    "Add Other Ingredient": "Add Other Ingredient",
+    "Recording!! (click to stop)": "Recording!! (click to stop)",
+    "Do you want to": "Do you want to",
+    "save this description": "save this description",
+    "Add or edit recipe description choosing the best one option": "Add or edit recipe description choosing the best one option",
+    "Edit": "Edit",
+    "just type to edit your description": "just type to edit your description",
+    "recording an audio description": "recording an audio description",
+    "Or": "Or",
+    "just enter your description": "just enter your description",
+    "Start": "Start",
+    "Click to add a recipe description": "Click to add a recipe description",
+    "Clean all": "Clean all",
+    "Enter ingredient name": "Enter ingredient name"
   }
 }
