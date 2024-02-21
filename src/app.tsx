@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CheckBox } from './components/check-box';
 import { InputIngredients } from './components/input-ingredients';
 import LogoPao from './assets/img/pao-logo.png';
@@ -6,6 +6,7 @@ import Plus from './assets/img/plus.png';
 import Minus from './assets/img/minus.png';
 import { NoteCard } from './components/note';
 import { useTranslation } from 'react-i18next';
+import ReactToPrint from 'react-to-print';
 
 export function App() {
   const {
@@ -13,35 +14,34 @@ export function App() {
     i18n: { changeLanguage, language },
   } = useTranslation();
 
-  const [currentLanguage, setCurrentLanguage] = useState(() => {
-    const newCurrentLanguage = localStorage.getItem('language');
-    if (newCurrentLanguage) {
-      return JSON.parse(newCurrentLanguage);
-    }
-    return;
-  });
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+
+  useEffect(() => {
+    const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
+    changeLanguage(preferredLanguage);
+    setCurrentLanguage(preferredLanguage);
+  }, []);
 
   function handleChangeLanguage() {
     const newLanguage = currentLanguage === 'en' ? 'pt' : 'en';
     changeLanguage(newLanguage);
     setCurrentLanguage(newLanguage);
-    localStorage.setItem(
-      'language',
-      JSON.stringify(currentLanguage === 'en' ? 'pt' : 'en'),
-    );
+    localStorage.setItem('preferredLanguage', newLanguage);
+    window.location.reload();
   }
 
   // add new incredient
   const [state, setState] = useState({
     modal: false,
-    salt: false,
-    eggs: false,
-    milk: false,
-    oil: false,
-    chocolate: false,
-    butter: false,
-    sugar: false,
-    yeast: false,
+    [t('water')]: false,
+    [t('salt')]: false,
+    [t('eggs')]: false,
+    [t('milk')]: false,
+    [t('oil')]: false,
+    [t('chocolate')]: false,
+    [t('butter')]: false,
+    [t('sugar')]: false,
+    [t('yeast')]: false,
   });
   const [extraIngredients, setExtraIngredients] = useState<string[]>([]);
 
@@ -55,14 +55,15 @@ export function App() {
     }
   };
   const ingredients = [
-    { name: t('Salt'), visible: state.salt },
-    { name: t('Sugar'), visible: state.sugar },
-    { name: t('Oil'), visible: state.oil },
-    { name: t('Butter'), visible: state.butter },
-    { name: t('Eggs'), visible: state.eggs },
-    { name: t('Chocolate'), visible: state.chocolate },
-    { name: t('Milk'), visible: state.milk },
-    { name: t('Yeast'), visible: state.yeast },
+    { name: t('Water'), visible: state[t('water')] },
+    { name: t('Salt'), visible: state[t('salt')] },
+    { name: t('Sugar'), visible: state[t('sugar')] },
+    { name: t('Oil'), visible: state[t('oil')] },
+    { name: t('Butter'), visible: state[t('butter')] },
+    { name: t('Eggs'), visible: state[t('eggs')] },
+    { name: t('Chocolate'), visible: state[t('chocolate')] },
+    { name: t('Milk'), visible: state[t('milk')] },
+    { name: t('Yeast'), visible: state[t('yeast')] },
     ...extraIngredients.map((ingredient: string) => ({
       name: ingredient,
       visible: state[ingredient.toLowerCase() as keyof typeof state],
@@ -100,19 +101,21 @@ export function App() {
   };
   //button increment value in flour
 
+  const componentRef = useRef(null);
+
   return (
-    <>
+    <section ref={componentRef}>
       {currentLanguage === 'en' ? (
         <button
           onClick={handleChangeLanguage}
-          className="text-sm font-sans font-semibold bg-gradient-to-r from-blue-600 to-red-500 p-0.5 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg"
+          className="hiddenPrint text-sm font-sans font-semibold bg-gradient-to-r from-blue-600 to-red-500 p-0.5 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg"
         >
           EN/PT
         </button>
       ) : (
         <button
           onClick={handleChangeLanguage}
-          className="text-sm font-sans font-semibold bg-gradient-to-r from-green-600 to-yellow-400 p-0.5 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg"
+          className="hiddenPrint text-sm font-sans font-semibold bg-gradient-to-r from-green-600 to-yellow-400 p-0.5 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg"
         >
           EN/PT
         </button>
@@ -121,11 +124,19 @@ export function App() {
         <div className="bread-logo my-3">
           <img className="bread-logo-img" src={LogoPao} alt="" />
         </div>
-        <h1> {t('Bread Calculator')}</h1>
+        <h1 className="marginOff"> {t('Bread Calculator')}</h1>
+        <input
+          className="text-center "
+          name="Receita"
+          type="text"
+          id="name"
+          placeholder="Nome da receita"
+          required
+        />
       </header>
       <section className="inputs">
         <div className="label-ingredient">
-          <label id="flour-label" htmlFor="flour">
+          <label className="marginOff" id="flour-label" htmlFor="flour">
             {t('Flour')}
           </label>
         </div>
@@ -135,14 +146,14 @@ export function App() {
             className="increment-button"
             onClick={() => scale('down')}
           >
-            <img src={Minus} alt="Decrement" />
+            <img className="hiddenPrint" src={Minus} alt="Decrement" />
           </div>
           <div
             id="incrementer"
             className="increment-button"
             onClick={() => scale('up')}
           >
-            <img src={Plus} alt="Increment" />
+            <img className=" hiddenPrint" src={Plus} alt="Increment" />
           </div>
           <input
             className=""
@@ -155,11 +166,6 @@ export function App() {
           />
           <p>g</p>
         </div>
-        <InputIngredients
-          ingredient={t('Water')}
-          visible={true}
-          value={flourAmount}
-        />
         <>
           {ingredients.map((ingredient, index) => (
             <InputIngredients
@@ -172,7 +178,7 @@ export function App() {
         </>
       </section>
       <button
-        className=" hover:ring-1 hover:ring-offset-slate-200 ingredients-button"
+        className=" hiddenPrint hover:ring-1 hover:ring-offset-slate-200 ingredients-button"
         id="button"
         onClick={mostrarModal}
       >
@@ -192,16 +198,7 @@ export function App() {
                 />
                 <label htmlFor="flour-checkbox">{t('Flour')}</label>
               </div>
-              <div className="input-check">
-                <input
-                  type="checkbox"
-                  name="ingredient"
-                  id="water-checkbox"
-                  checked
-                  disabled
-                />
-                <label htmlFor="water-checkbox">{t('Water')}</label>
-              </div>
+
               <>
                 {ingredients.map((ingredient, index) => (
                   <CheckBox
@@ -244,6 +241,24 @@ export function App() {
       <section>
         <NoteCard />
       </section>
-    </>
+      <ReactToPrint
+        trigger={() => (
+          <button className="hiddenPrint hiddenPrint bg-lime-600 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg w-auto mt-1 p-1 font-semibold text-sm">
+            Save Recipe
+          </button>
+        )}
+        content={() => componentRef.current}
+        pageStyle={` @media print {
+        .hiddenPrint {
+          display: none;
+         }
+        .marginOff {
+          margin: 0;
+         }
+
+
+      }`}
+      />
+    </section>
   );
 }

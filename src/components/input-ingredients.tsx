@@ -44,8 +44,9 @@ export const InputIngredients: React.FC<Props> = ({
       className={`ingredients-group ${visible ? '' : 'hidden'}`}
       id={`${ingredient.toLowerCase()}-input-group`}
     >
-      <div className="label-ingredient">
+      <div className="label-ingredient marginOff ">
         <label
+          className="marginOff "
           id={`${ingredient.toLowerCase()}-label`}
           htmlFor={`${ingredient.toLowerCase()}-grams`}
         >

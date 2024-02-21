@@ -84,7 +84,7 @@ export function NoteCard() {
     <section className="flex flex-col my-[22.4px] h-auto">
       <Dialog.Root>
         <Dialog.Trigger className=" max-w[380px] h-auto rounded-md text-left bg-[#fff] flex flex-col p-5 gap-3 overflow-hidden border border-color[rgba(223, 220, 200, 0.5)] relative hover:ring-1 hover:ring-offset-slate-200 focus-visible:ring-2 focus-visible:ring-lime-400 outline-none">
-          <span className="text-sm font-medium text-slate-300">
+          <span className=" hiddenPrint text-sm font-medium text-slate-300">
             {t('Click to add a recipe description')}
           </span>
 
@@ -178,7 +178,7 @@ export function NoteCard() {
       </Dialog.Root>
       <button
         onClick={handleDeleteContent}
-        className="bg-orange-400 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg w-auto mt-1 p-1 font-semibold text-sm"
+        className="hiddenPrint bg-orange-400 hover:ring-1 hover:ring-offset-slate-200 border border-color[rgba(223, 220, 200, 0.5)] rounded-lg w-auto mt-1 p-1 font-semibold text-sm"
       >
         {t('Clean all')}
       </button>
